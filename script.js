@@ -28,55 +28,50 @@ function capitalizeFirstLetter(val) {
   return String(val).charAt(0).toUpperCase() + String(val).slice(1);
 }
 
-function playGame() {
-
-  // keep track of players scores
-  let humanScore = 0;
-  let computerScore = 0;
-  let roundWinner = "";
-
-  // function to play one round, log the result, and increment the winner's score
-  function playRound(humanChoice, computerChoice) {
-    // tie
-    if (humanChoice == computerChoice) {
-      roundWinner = "tie";
-      console.log("It's a tie!");
-      return;
-    }
-    // computer wins
-    else if (
-      (humanChoice == "rock") && (computerChoice == "paper") ||
-      (humanChoice == "paper") && (computerChoice == "scissors") ||
-      (humanChoice == "scissors") && (computerChoice == "rock")
-    ) {
-      computerScore++;
-      console.log(`You lose! ${capitalizeFirstLetter(humanChoice)} is beaten by ${capitalizeFirstLetter(computerChoice)}!`)
-    }
-    // human wins
-    else if (
-      (humanChoice == "rock") && (computerChoice == "scissors") ||
-      (humanChoice == "paper") && (computerChoice == "rock") ||
-      (humanChoice == "scissors") && (computerChoice == "paper")
-    ) {
-      humanScore++;
-      console.log(`You win! ${capitalizeFirstLetter(humanChoice)} beats ${capitalizeFirstLetter(computerChoice)}!`)
-    }
+// function to play one round, log the result, and increment the winner's score
+function playRound(humanChoice, computerChoice) {
+  // tie
+  if (humanChoice == computerChoice) {
+    roundWinner = "tie";
+    console.log("It's a tie!");
+    return;
   }
-
-  // play 5 rounds
-  for (let i = 1; i <= 5; i++) {
-    console.log("Round " + i);
-    const computerChoice = getComputerChoice();
-    console.log("computer choice = " + computerChoice);
-
-    const humanChoice = getHumanChoice();
-    console.log("human choice = " + humanChoice);
-
-    playRound(humanChoice, computerChoice);
-
-    console.log("human score is " + humanScore);
-    console.log("computer score is " + computerScore);
+  // computer wins
+  else if (
+    (humanChoice == "rock") && (computerChoice == "paper") ||
+    (humanChoice == "paper") && (computerChoice == "scissors") ||
+    (humanChoice == "scissors") && (computerChoice == "rock")
+  ) {
+    computerScore++;
+    console.log(`You lose! ${capitalizeFirstLetter(humanChoice)} is beaten by ${capitalizeFirstLetter(computerChoice)}!`)
+  }
+  // human wins
+  else if (
+    (humanChoice == "rock") && (computerChoice == "scissors") ||
+    (humanChoice == "paper") && (computerChoice == "rock") ||
+    (humanChoice == "scissors") && (computerChoice == "paper")
+  ) {
+    humanScore++;
+    console.log(`You win! ${capitalizeFirstLetter(humanChoice)} beats ${capitalizeFirstLetter(computerChoice)}!`)
   }
 }
 
-playGame();
+// keep track of players scores
+let humanScore = 0;
+let computerScore = 0;
+let roundWinner = "";  
+
+// play 5 rounds
+for (let i = 1; i <= 5; i++) {
+  console.log("Round " + i);
+  const computerChoice = getComputerChoice();
+  console.log("computer choice = " + computerChoice);
+
+  const humanChoice = getHumanChoice();
+  console.log("human choice = " + humanChoice);
+
+  playRound(humanChoice, computerChoice);
+
+  console.log("human score is " + humanScore);
+  console.log("computer score is " + computerScore);
+}
