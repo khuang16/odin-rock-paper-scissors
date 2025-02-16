@@ -1,7 +1,6 @@
 function getComputerChoice() {
   // select a random number 0, 1, or 2
   let choice = Math.floor(Math.random()*3);
-  console.log(choice);
   // convert the random number to a choice between rock, paper, or scissors
   switch (choice) {
     case 0: 
@@ -28,47 +27,43 @@ function getHumanChoice() {
   }
 }
 
-// play one round; log the result and return the winner
-function playRound(humanChoice, computerChoice) {
-  switch (true) {
-    case ((humanChoice == "rock") && (computerChoice == "paper")):
-      console.log("You lose! Paper beats Rock.")
-      return "computer";
-    case ((humanChoice == "paper") && (computerChoice == "scissors")):
-      console.log("You lose! Scissors beats Paper.")
-      return "computer";
-    case ((humanChoice == "scissors") && (computerChoice == "rock")):
-      console.log("You lose! Rock beats Scissors.")
-      return "computer";
-    case ((humanChoice == "rock") && (computerChoice == "scissors")):
-      console.log("You win! Rock beats Scissors.")
-      return "human";
-    case ((humanChoice == "paper") && (computerChoice == "rock")):
-      console.log("You win! Paper beats Rock.")
-      return "human";
-    case ((humanChoice == "scissors") && (computerChoice == "paper")):
-      console.log("You win! Scissors beats Paper.")
-      return "human";
-    default:
-      console.log("It's a tie!");
-      return "tie";
-    }
+function capitalizeFirstLetter(val) {
+  return String(val).charAt(0).toUpperCase() + String(val).slice(1);
 }
-
 
 function playGame() {
 
   // keep track of players scores
   let humanScore = 0;
   let computerScore = 0;
+  let roundWinner = "";
 
-  // increment score for winning player
-  function incrementWinner(winner) {
-    if (winner == "human") {
-      humanScore++;
-    } else if (winner == "computer") {
+  // function to play one round, log the result, and increment the winner's score
+  function playRound(humanChoice, computerChoice) {
+    // tie
+    if (humanChoice == computerChoice) {
+      roundWinner = "tie";
+      console.log("It's a tie!");
+      return;
+    }
+    // computer wins
+    else if (
+      (humanChoice == "rock") && (computerChoice == "paper") ||
+      (humanChoice == "paper") && (computerChoice == "scissors") ||
+      (humanChoice == "scissors") && (computerChoice == "rock")
+    ) {
       computerScore++;
-    } 
+      console.log(`You lose! ${capitalizeFirstLetter(humanChoice)} is beaten by ${capitalizeFirstLetter(computerChoice)}!`)
+    }
+    // human wins
+    else if (
+      (humanChoice == "rock") && (computerChoice == "scissors") ||
+      (humanChoice == "paper") && (computerChoice == "rock") ||
+      (humanChoice == "scissors") && (computerChoice == "paper")
+    ) {
+      humanScore++;
+      console.log(`You win! ${capitalizeFirstLetter(humanChoice)} beats ${capitalizeFirstLetter(computerChoice)}!`)
+    }
   }
 
   // play 5 rounds
@@ -80,10 +75,7 @@ function playGame() {
     const humanChoice = getHumanChoice();
     console.log("human choice = " + humanChoice);
 
-    let winner = playRound(humanChoice, computerChoice);
-    console.log("winner is " + winner);
-
-    incrementWinner(winner);
+    playRound(humanChoice, computerChoice);
 
     console.log("human score is " + humanScore);
     console.log("computer score is " + computerScore);
