@@ -1,7 +1,5 @@
 function getComputerChoice() {
-  // select a random number 0, 1, or 2
-  let choice = Math.floor(Math.random()*3);
-  // convert the random number to a choice between rock, paper, or scissors
+  let choice = Math.floor(Math.random() * 3);
   switch (choice) {
     case 0: 
       return "rock";
@@ -13,7 +11,6 @@ function getComputerChoice() {
 }
 
 function getHumanChoice() {
-  // ask for user input
   let choice = prompt("Rock, paper, scissors, shoot!");
   // keep asking for user input until it is valid
   while (true) {
