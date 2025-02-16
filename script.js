@@ -55,30 +55,39 @@ function playRound(humanChoice, computerChoice) {
     }
 }
 
-// keep track of players scores
-let humanScore = 0;
-let computerScore = 0;
 
-const computerChoice = getComputerChoice();
-console.log("computer choice = " + computerChoice);
+function playGame() {
 
-const humanChoice = getHumanChoice();
-console.log("human choice = " + humanChoice);
+  // keep track of players scores
+  let humanScore = 0;
+  let computerScore = 0;
 
-let winner = playRound(humanChoice, computerChoice);
-console.log("winner is " + winner);
+  // increment score for winning player
+  function incrementWinner(winner) {
+    if (winner == "human") {
+      humanScore++;
+    } else if (winner == "computer") {
+      computerScore++;
+    } 
+  }
 
-// increment score for winning player
-switch (winner) {
-  case("human"):
-    humanScore++;
-    break;
-  case("computer"):
-    computerScore++;
-    break;
-  default:
-    break
+  // play 5 rounds
+  for (let i = 1; i <= 5; i++) {
+    console.log("Round " + i);
+    const computerChoice = getComputerChoice();
+    console.log("computer choice = " + computerChoice);
+
+    const humanChoice = getHumanChoice();
+    console.log("human choice = " + humanChoice);
+
+    let winner = playRound(humanChoice, computerChoice);
+    console.log("winner is " + winner);
+
+    incrementWinner(winner);
+
+    console.log("human score is " + humanScore);
+    console.log("computer score is " + computerScore);
+  }
 }
 
-console.log("human score is " + humanScore);
-console.log("computer score is " + computerScore);
+playGame();
