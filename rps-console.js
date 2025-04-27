@@ -10,7 +10,7 @@ function getComputerChoice() {
   }
 }
 
-function getHumanChoice() {
+function getplayerChoice() {
   let choice = prompt("Rock, paper, scissors, shoot!");
   // keep asking for user input until it is valid
   while (true) {
@@ -29,35 +29,35 @@ function capitalizeFirstLetter(val) {
 }
 
 // function to play one round, log the result, and increment the winner's score
-function playRound(humanChoice, computerChoice) {
+function playRound(playerChoice, computerChoice) {
   // tie
-  if (humanChoice == computerChoice) {
+  if (playerChoice == computerChoice) {
     roundWinner = "tie";
     console.log("It's a tie!");
     return;
   }
   // computer wins
   else if (
-    (humanChoice == "rock") && (computerChoice == "paper") ||
-    (humanChoice == "paper") && (computerChoice == "scissors") ||
-    (humanChoice == "scissors") && (computerChoice == "rock")
+    (playerChoice == "rock") && (computerChoice == "paper") ||
+    (playerChoice == "paper") && (computerChoice == "scissors") ||
+    (playerChoice == "scissors") && (computerChoice == "rock")
   ) {
     computerScore++;
-    console.log(`You lose! ${capitalizeFirstLetter(humanChoice)} is beaten by ${capitalizeFirstLetter(computerChoice)}!`)
+    console.log(`You lose! ${capitalizeFirstLetter(playerChoice)} is beaten by ${capitalizeFirstLetter(computerChoice)}!`)
   }
   // human wins
   else if (
-    (humanChoice == "rock") && (computerChoice == "scissors") ||
-    (humanChoice == "paper") && (computerChoice == "rock") ||
-    (humanChoice == "scissors") && (computerChoice == "paper")
+    (playerChoice == "rock") && (computerChoice == "scissors") ||
+    (playerChoice == "paper") && (computerChoice == "rock") ||
+    (playerChoice == "scissors") && (computerChoice == "paper")
   ) {
-    humanScore++;
-    console.log(`You win! ${capitalizeFirstLetter(humanChoice)} beats ${capitalizeFirstLetter(computerChoice)}!`)
+    playerScore++;
+    console.log(`You win! ${capitalizeFirstLetter(playerChoice)} beats ${capitalizeFirstLetter(computerChoice)}!`)
   }
 }
 
 // keep track of players scores
-let humanScore = 0;
+let playerScore = 0;
 let computerScore = 0;
 let roundWinner = "";  
 
@@ -67,11 +67,11 @@ for (let i = 1; i <= 5; i++) {
   const computerChoice = getComputerChoice();
   console.log("computer choice = " + computerChoice);
 
-  const humanChoice = getHumanChoice();
-  console.log("human choice = " + humanChoice);
+  const playerChoice = getplayerChoice();
+  console.log("human choice = " + playerChoice);
 
-  playRound(humanChoice, computerChoice);
+  playRound(playerChoice, computerChoice);
 
-  console.log("human score is " + humanScore);
+  console.log("human score is " + playerScore);
   console.log("computer score is " + computerScore);
 }
